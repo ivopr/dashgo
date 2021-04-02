@@ -1,38 +1,43 @@
-import { Box, Stack } from "@chakra-ui/react";
-import { RiContactsLine, RiDashboardLine, RiGitMergeLine, RiInputMethodLine } from "react-icons/ri";
+import {
+  Box,
+  Drawer,
+  DrawerBody,
+  DrawerCloseButton,
+  DrawerContent,
+  DrawerHeader,
+  DrawerOverlay,
+  useBreakpointValue
+} from "@chakra-ui/react";
+import { useSidebarDrawer } from "src/contexts/SidebarDrawer";
 
-import { NavSection } from "./NavSection";
-
-const data = {
-  general: [
-    {
-      name: "Dashboard",
-      Icon: RiDashboardLine
-    },
-    {
-      name: "Users",
-      Icon: RiContactsLine
-    }
-  ],
-  automation: [
-    {
-      name: "Forms",
-      Icon: RiInputMethodLine
-    },
-    {
-      name: "Automation",
-      Icon: RiGitMergeLine
-    }
-  ]
-};
+import { Nav } from "./Nav";
 
 export function Sidebar(): JSX.Element {
+  const { isOpen, onClose } = useSidebarDrawer();
+  const isDrawerSidebar = useBreakpointValue({
+    base: true,
+    lg: false
+  });
+
+  if (isDrawerSidebar) {
+    return (
+      <Drawer isOpen={isOpen} placement="left" onClose={onClose}>
+        <DrawerOverlay>
+          <DrawerContent bg="gray.800" p="4">
+            <DrawerCloseButton mt="6" />
+            <DrawerHeader>Navegação</DrawerHeader>
+            <DrawerBody>
+              <Nav />
+            </DrawerBody>
+          </DrawerContent>
+        </DrawerOverlay>
+      </Drawer>
+    );
+  }
+
   return (
     <Box as="aside" mr="8" w="64">
-      <Stack align="flex-start" spacing="12">
-        <NavSection links={data.general} title="General" />
-        <NavSection links={data.automation} title="Automation" />
-      </Stack>
+      <Nav />
     </Box>
   );
 }

@@ -66,7 +66,7 @@ export default function Dashboard(): JSX.Element {
         <Sidebar />
 
         <SimpleGrid align="flex-start" flex="1" gap="4" minChildWidth="320px">
-          <Box bg="gray.800" borderRadius={8} p="8" pb="4">
+          <Box bg="gray.800" borderRadius={8} p={["6", "8"]} pb="4">
             <Text fontSize="lg" mb="4">
               Weekly Fishes
             </Text>
@@ -74,7 +74,7 @@ export default function Dashboard(): JSX.Element {
             <Chart height={160} options={options} series={series} type="area" />
           </Box>
 
-          <Box bg="gray.800" borderRadius={8} p="8" pb="4">
+          <Box bg="gray.800" borderRadius={8} p={["6", "8"]} pb="4">
             <Text fontSize="lg" mb="4">
               Monthly Fishes
             </Text>

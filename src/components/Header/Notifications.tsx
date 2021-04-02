@@ -7,10 +7,10 @@ export function Notifications(): JSX.Element {
       borderColor="gray.700"
       borderRightWidth={1}
       color="gray.300"
-      mx="8"
-      pr="8"
+      mx={["6", "8"]}
+      pr={["6", "8"]}
       py="1"
-      spacing="8">
+      spacing={["6", "8"]}>
       <Icon as={RiNotificationLine} fontSize={20} />
       <Icon as={RiUserAddLine} fontSize={20} />
     </HStack>

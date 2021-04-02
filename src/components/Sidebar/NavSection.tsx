@@ -7,6 +7,7 @@ interface NavSectionProps {
   links: {
     name: string;
     Icon: IconType;
+    href: string;
   }[];
   title: string;
 }
@@ -20,7 +21,7 @@ export function NavSection({ links, title }: NavSectionProps): JSX.Element {
 
       <Stack align="stretch" mt="8" spacing="4">
         {links.map((link) => (
-          <NavLink icon={link.Icon} name={link.name} key={link.name} />
+          <NavLink href={link.href} icon={link.Icon} name={link.name} key={link.name} />
         ))}
       </Stack>
     </Box>
