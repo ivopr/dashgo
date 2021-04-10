@@ -5,6 +5,7 @@ import {
   Flex,
   Heading,
   Icon,
+  Link as ChakraLink,
   Spinner,
   Table,
   Tbody,
@@ -15,7 +16,9 @@ import {
   Tr
 } from "@chakra-ui/react";
 import { Header, Pagination, Sidebar } from "@components";
+import { api } from "@services/api";
 import { useUsers } from "@services/hooks/useUsers";
+import { queryClient } from "@services/queryClient";
 import Head from "next/head";
 import NextLink from "next/link";
 import { useState } from "react";
@@ -25,6 +28,19 @@ export default function UserList(): JSX.Element {
   const [page, setPage] = useState(1);
   const { data, isFetching, isLoading, error } = useUsers(page);
 
+  async function handlePrefetchUser(id: string) {
+    await queryClient.prefetchQuery(
+      ["user", id],
+      async () => {
+        const response = await api.get(`/users/${id}`);
+
+        return response.data;
+      },
+      {
+        staleTime: 1000 * 60 * 10
+      }
+    );
+  }
   return (
     <>
       <Head>
@@ -88,7 +104,16 @@ export default function UserList(): JSX.Element {
 
                           <Td px={["4", "4", "6"]}>
                             <Box>
-                              <Text fontWeight="bold">{user.name}</Text>
+                              {" "}
+                              <ChakraLink
+                                _hover={{
+                                  color: "purple.500"
+                                }}
+                                color="purple.400"
+                                onMouseEnter={() => handlePrefetchUser(user.id)}
+                              >
+                                <Text fontWeight="bold">{user.name}</Text>
+                              </ChakraLink>
                               <Text color="gray.300" fontSize="small">
                                 {user.email}
                               </Text>

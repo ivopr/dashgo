@@ -40,6 +40,6 @@ export function useUsers(
   page: number
 ): UseQueryResult<GetUsersResponse, unknown> {
   return useQuery(["users", page], () => getUsers(page), {
-    staleTime: 5 * 1000
+    staleTime: 1000 * 60 * 10
   });
 }
