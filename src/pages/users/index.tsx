@@ -20,13 +20,6 @@ import Head from "next/head";
 import NextLink from "next/link";
 import { RiAddLine } from "react-icons/ri";
 
-interface User {
-  id: string;
-  name: string;
-  email: string;
-  createdAt: Date;
-}
-
 export default function UserList(): JSX.Element {
   const { data, isFetching, isLoading, error } = useUsers();
 
@@ -85,7 +78,7 @@ export default function UserList(): JSX.Element {
                       </Tr>
                     </Thead>
                     <Tbody>
-                      {data.map((user: User) => (
+                      {data.map((user) => (
                         <Tr key={user.id}>
                           <Td px={["4", "4", "6"]}>
                             <Checkbox colorScheme="pink" />
