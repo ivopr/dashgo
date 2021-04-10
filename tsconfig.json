@@ -21,6 +21,7 @@
     "paths": {
       "@components/*": ["./src/components/*"],
       "@components": ["./src/components/index.tsx"],
+      "@contexts/*": ["./src/contexts/*"],
     }
   },
   "include": [
