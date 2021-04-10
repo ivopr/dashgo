@@ -16,7 +16,7 @@ export function Profile({ showProfileData = true }: ProfileProps): JSX.Element {
         </Box>
       )}
 
-      <Avatar name="Ivo Vieira" size="md" src="https://github.com/demotional.png" />
+      <Avatar name="Ivo Vieira" size="md" src="https://github.com/ivopr.png" />
     </Flex>
   );
 }

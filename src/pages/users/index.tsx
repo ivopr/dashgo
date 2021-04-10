@@ -24,7 +24,19 @@ import NextLink from "next/link";
 import { useState } from "react";
 import { RiAddLine } from "react-icons/ri";
 
-export default function UserList(): JSX.Element {
+interface UserListProps {
+  initialData: {
+    users: {
+      id: string;
+      name: string;
+      email: string;
+      createdAt: string;
+    }[];
+    totalCount: number;
+  };
+}
+
+export default function UserList({ initialData }: UserListProps): JSX.Element {
   const [page, setPage] = useState(1);
   const { data, isFetching, isLoading, error } = useUsers(page);
 
@@ -139,3 +151,16 @@ export default function UserList(): JSX.Element {
     </>
   );
 }
+
+// to use ReactQuery with SSR just uncomment this, note that it should have
+// the same typings as the ReactQuery cache
+
+// export const getServerSideProps: GetServerSideProps = async () => {
+//   const { users, totalCount } = await getUsers(1);
+
+//   return {
+//     props: {
+//       initialData: { users, totalCount }
+//     }
+//   };
+// };
