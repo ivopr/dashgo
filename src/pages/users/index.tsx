@@ -18,10 +18,12 @@ import { Header, Pagination, Sidebar } from "@components";
 import { useUsers } from "@services/hooks/useUsers";
 import Head from "next/head";
 import NextLink from "next/link";
+import { useState } from "react";
 import { RiAddLine } from "react-icons/ri";
 
 export default function UserList(): JSX.Element {
-  const { data, isFetching, isLoading, error } = useUsers();
+  const [page, setPage] = useState(1);
+  const { data, isFetching, isLoading, error } = useUsers(page);
 
   return (
     <>
@@ -78,7 +80,7 @@ export default function UserList(): JSX.Element {
                       </Tr>
                     </Thead>
                     <Tbody>
-                      {data.map((user) => (
+                      {data.users.map((user) => (
                         <Tr key={user.id}>
                           <Td px={["4", "4", "6"]}>
                             <Checkbox colorScheme="pink" />
@@ -99,7 +101,11 @@ export default function UserList(): JSX.Element {
                   </Table>
                 </Box>
 
-                <Pagination />
+                <Pagination
+                  currentPage={page}
+                  onPageChange={setPage}
+                  totalRegisterCount={data.totalCount}
+                />
               </>
             )}
           </Box>

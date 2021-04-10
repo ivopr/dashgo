@@ -3,9 +3,14 @@ import { Button } from "@chakra-ui/react";
 interface ItemProps {
   isCurrent?: boolean;
   number: number;
+  onPageChange: (page: number) => void;
 }
 
-export function Item({ isCurrent = false, number }: ItemProps): JSX.Element {
+export function Item({
+  isCurrent = false,
+  number,
+  onPageChange
+}: ItemProps): JSX.Element {
   if (isCurrent) {
     return (
       <Button
@@ -17,7 +22,8 @@ export function Item({ isCurrent = false, number }: ItemProps): JSX.Element {
         disabled
         fontSize="xs"
         size="sm"
-        w="4">
+        w="4"
+      >
         {number}
       </Button>
     );
@@ -30,8 +36,10 @@ export function Item({ isCurrent = false, number }: ItemProps): JSX.Element {
       }}
       bg="gray.700"
       fontSize="xs"
+      onClick={() => onPageChange(number)}
       size="sm"
-      w="4">
+      w="4"
+    >
       {number}
     </Button>
   );
