@@ -2,6 +2,7 @@ import { Box, Flex, SimpleGrid, Text } from "@chakra-ui/layout";
 import theme from "@chakra-ui/theme";
 import { Header, Sidebar } from "@components";
 import dynamic from "next/dynamic";
+import Head from "next/head";
 
 const Chart = dynamic(() => import("react-apexcharts"), {
   ssr: false
@@ -59,30 +60,45 @@ const series = [{ name: "One", data: [31, 120, 10, 28, 51, 18, 109] }];
 
 export default function Dashboard(): JSX.Element {
   return (
-    <Flex direction="column" h="100vh">
-      <Header />
+    <>
+      <Head>
+        <title>dashboard — dashgo</title>
+      </Head>
+      <Flex direction="column" h="100vh">
+        <Header />
 
-      <Flex maxW={1480} mx="auto" my="6" px="6" w="100%">
-        <Sidebar />
+        <Flex maxW={1480} mx="auto" my="6" px="6" w="100%">
+          <Sidebar />
 
-        <SimpleGrid align="flex-start" flex="1" gap="4" minChildWidth="320px">
-          <Box bg="gray.800" borderRadius={8} p={["6", "8"]} pb="4">
-            <Text fontSize="lg" mb="4">
-              Weekly Fishes
-            </Text>
+          <SimpleGrid align="flex-start" flex="1" gap="4" minChildWidth="320px">
+            <Box bg="gray.800" borderRadius={8} p={["6", "8"]} pb="4">
+              <Text fontSize="lg" mb="4">
+                Weekly Fishes
+              </Text>
 
-            <Chart height={160} options={options} series={series} type="area" />
-          </Box>
+              <Chart
+                height={160}
+                options={options}
+                series={series}
+                type="area"
+              />
+            </Box>
 
-          <Box bg="gray.800" borderRadius={8} p={["6", "8"]} pb="4">
-            <Text fontSize="lg" mb="4">
-              Monthly Fishes
-            </Text>
+            <Box bg="gray.800" borderRadius={8} p={["6", "8"]} pb="4">
+              <Text fontSize="lg" mb="4">
+                Monthly Fishes
+              </Text>
 
-            <Chart height={160} options={options} series={series} type="area" />
-          </Box>
-        </SimpleGrid>
+              <Chart
+                height={160}
+                options={options}
+                series={series}
+                type="area"
+              />
+            </Box>
+          </SimpleGrid>
+        </Flex>
       </Flex>
-    </Flex>
+    </>
   );
 }

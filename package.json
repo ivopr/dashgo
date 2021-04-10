@@ -42,6 +42,7 @@
     "eslint-plugin-simple-import-sort": "^7.0.0",
     "git-cz": "^4.7.6",
     "husky": "^6.0.0",
+    "miragejs": "^0.1.41",
     "prettier": "^2.2.1"
   }
 }
