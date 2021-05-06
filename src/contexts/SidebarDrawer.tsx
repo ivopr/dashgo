@@ -10,7 +10,9 @@ type ContextData = UseDisclosureReturn;
 
 const SidebarDrawerContext = createContext({} as ContextData);
 
-export function SidebarDrawerProvider({ children }: ProviderProps): JSX.Element {
+export function SidebarDrawerProvider({
+  children
+}: ProviderProps): JSX.Element {
   const disclosure = useDisclosure();
   const router = useRouter();
 
@@ -19,8 +21,11 @@ export function SidebarDrawerProvider({ children }: ProviderProps): JSX.Element 
   }, [router.asPath]);
 
   return (
-    <SidebarDrawerContext.Provider value={disclosure}>{children}</SidebarDrawerContext.Provider>
+    <SidebarDrawerContext.Provider value={disclosure}>
+      {children}
+    </SidebarDrawerContext.Provider>
   );
 }
 
-export const useSidebarDrawer = (): ContextData => useContext(SidebarDrawerContext);
+export const useSidebarDrawer = (): ContextData =>
+  useContext(SidebarDrawerContext);

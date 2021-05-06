@@ -1,8 +1,10 @@
 import { Box, Flex, SimpleGrid, Text } from "@chakra-ui/layout";
 import theme from "@chakra-ui/theme";
 import { Header, Sidebar } from "@components";
+import { Can } from "@components/Can";
 import dynamic from "next/dynamic";
 import Head from "next/head";
+import { withSSRAuth } from "src/utils/withSSRAuth";
 
 const Chart = dynamic(() => import("react-apexcharts"), {
   ssr: false
@@ -70,35 +72,48 @@ export default function Dashboard(): JSX.Element {
         <Flex maxW={1480} mx="auto" my="6" px="6" w="100%">
           <Sidebar />
 
-          <SimpleGrid align="flex-start" flex="1" gap="4" minChildWidth="320px">
-            <Box bg="gray.800" borderRadius={8} p={["6", "8"]} pb="4">
-              <Text fontSize="lg" mb="4">
-                Weekly Fishes
-              </Text>
+          <Can permissions={["metrics.list"]}>
+            <SimpleGrid
+              align="flex-start"
+              flex="1"
+              gap="4"
+              minChildWidth="320px"
+            >
+              <Box bg="gray.800" borderRadius={8} p={["6", "8"]} pb="4">
+                <Text fontSize="lg" mb="4">
+                  Weekly Fishes
+                </Text>
 
-              <Chart
-                height={160}
-                options={options}
-                series={series}
-                type="area"
-              />
-            </Box>
+                <Chart
+                  height={160}
+                  options={options}
+                  series={series}
+                  type="area"
+                />
+              </Box>
 
-            <Box bg="gray.800" borderRadius={8} p={["6", "8"]} pb="4">
-              <Text fontSize="lg" mb="4">
-                Monthly Fishes
-              </Text>
+              <Box bg="gray.800" borderRadius={8} p={["6", "8"]} pb="4">
+                <Text fontSize="lg" mb="4">
+                  Monthly Fishes
+                </Text>
 
-              <Chart
-                height={160}
-                options={options}
-                series={series}
-                type="area"
-              />
-            </Box>
-          </SimpleGrid>
+                <Chart
+                  height={160}
+                  options={options}
+                  series={series}
+                  type="area"
+                />
+              </Box>
+            </SimpleGrid>
+          </Can>
         </Flex>
       </Flex>
     </>
   );
 }
+
+export const getServerSideProps = withSSRAuth(async () => {
+  return {
+    props: {}
+  };
+});

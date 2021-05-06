@@ -8,7 +8,12 @@ interface NavLinkProps extends LinkProps {
   name: string;
 }
 
-export function NavLink({ href, icon, name, ...rest }: NavLinkProps): JSX.Element {
+export function NavLink({
+  href,
+  icon,
+  name,
+  ...rest
+}: NavLinkProps): JSX.Element {
   return (
     <ActiveLink href={href} passHref>
       <Link align="center" display="flex" {...rest}>

@@ -15,7 +15,16 @@ export function Header(): JSX.Element {
   });
 
   return (
-    <Flex align="center" as="header" h="20" mt="4" mx="auto" px="6" w="100%" maxW={1480}>
+    <Flex
+      align="center"
+      as="header"
+      h="20"
+      mt="4"
+      mx="auto"
+      px="6"
+      w="100%"
+      maxW={1480}
+    >
       {!isWideVersion && (
         <IconButton
           aria-label="Open Navigation"

@@ -16,7 +16,7 @@ import {
   Tr
 } from "@chakra-ui/react";
 import { Header, Pagination, Sidebar } from "@components";
-import { api } from "@services/api";
+import { api } from "@services/apiClient";
 import { useUsers } from "@services/hooks/useUsers";
 import { queryClient } from "@services/queryClient";
 import Head from "next/head";

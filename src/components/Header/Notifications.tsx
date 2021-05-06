@@ -10,7 +10,8 @@ export function Notifications(): JSX.Element {
       mx={["6", "8"]}
       pr={["6", "8"]}
       py="1"
-      spacing={["6", "8"]}>
+      spacing={["6", "8"]}
+    >
       <Icon as={RiNotificationLine} fontSize={20} />
       <Icon as={RiUserAddLine} fontSize={20} />
     </HStack>

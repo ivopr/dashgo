@@ -1,8 +1,10 @@
-import { Button, Flex, Stack } from "@chakra-ui/react";
+import { Button, Flex, Heading, Stack } from "@chakra-ui/react";
 import { FormInput } from "@components";
+import { useAuth } from "@contexts/Authentication";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Head from "next/head";
 import { SubmitHandler, useForm, useFormState } from "react-hook-form";
+import { withSSRGuest } from "src/utils/withSSRGuest";
 import * as yup from "yup";
 
 interface SignInFormData {
@@ -25,9 +27,10 @@ export default function SignIn(): JSX.Element {
     resolver: yupResolver(signInFormSchema)
   });
   const { errors } = useFormState({ control });
+  const { signIn } = useAuth();
 
-  const handleSignIn: SubmitHandler<SignInFormData> = (values) => {
-    console.log(values);
+  const handleSignIn: SubmitHandler<SignInFormData> = async (values) => {
+    await signIn({ email: values.email, password: values.password });
   };
 
   return (
@@ -46,6 +49,7 @@ export default function SignIn(): JSX.Element {
           p={8}
           w="100%"
         >
+          <Heading mb={4}>Sign In</Heading>
           <Stack spacing={4}>
             <FormInput
               error={errors.email}
@@ -77,3 +81,9 @@ export default function SignIn(): JSX.Element {
     </>
   );
 }
+
+export const getServerSideProps = withSSRGuest(async () => {
+  return {
+    props: {}
+  };
+});

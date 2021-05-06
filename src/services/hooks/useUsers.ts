@@ -1,4 +1,4 @@
-import { api } from "@services/api";
+import { api } from "@services/apiClient";
 import { useQuery, UseQueryOptions, UseQueryResult } from "react-query";
 
 interface User {

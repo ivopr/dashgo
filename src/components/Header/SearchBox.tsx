@@ -17,7 +17,8 @@ export function SearchBox(): JSX.Element {
       ml="6"
       position="relative"
       px="8"
-      py="4">
+      py="4"
+    >
       <Input
         _placeholder={{
           color: "gray.400"

@@ -10,13 +10,14 @@ import {
 } from "@chakra-ui/react";
 import { FormInput, Header, Sidebar } from "@components";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { api } from "@services/api";
+import { api } from "@services/apiClient";
 import { queryClient } from "@services/queryClient";
 import Head from "next/head";
 import NextLink from "next/link";
 import { useRouter } from "next/router";
 import { SubmitHandler, useForm, useFormState } from "react-hook-form";
 import { useMutation } from "react-query";
+import { withSSRAuth } from "src/utils/withSSRAuth";
 import * as yup from "yup";
 
 interface CreateUserFormData {
@@ -152,3 +153,15 @@ export default function UserCreate(): JSX.Element {
     </>
   );
 }
+
+export const getServerSideProps = withSSRAuth(
+  async () => {
+    return {
+      props: {}
+    };
+  },
+  {
+    permissions: ["metrics.lists"],
+    roles: ["administrator"]
+  }
+);
